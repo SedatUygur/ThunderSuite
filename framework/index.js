@@ -1,8 +1,10 @@
-import * as snabbdom from "snabbdom";
+import { init, eventListenersModule } from "snabbdom";
 
-const patch = snabbdom.init([]);
+const patch = init([
+    eventListenersModule
+]);
 
-export const init = (selector, component) => {
+export const initial = (selector, component) => {
     const app = document.querySelector(selector);
     patch(app, component.template);
 };
