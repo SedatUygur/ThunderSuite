@@ -95,4 +95,24 @@ init("#app", div`Hello ${firstName} ${lastName}`);
 init("#app", p`Hello ${firstName} ${lastName}`);
 ```
 
+Let's create our first component in `./src/user.js`:
+
+```javascript
+import { div } from "../framework/element";
+const firstName = "Sedat";
+const lastName = "Uygur";
+export const User = ({ firstName, lastName }) =>
+  div`Hello ${firstName} ${lastName}`;
+```
+
+And modify `./index.js`:
+
+```javascript
+import { init } from "./framework";
+import { User } from "./src/user";
+const firstName = "Sedat";
+const lastName = "Uygur";
+init("#app", User({ firstName, lastName }));
+```
+
 # Second step (adding Virtual DOM)
