@@ -1,15 +1,10 @@
-const div = (strings, ...args) => {
-    let acc = "";
-    for(const [index, currentString] of strings.entries()) {
-      const interpolatedString = (args[index] || "");
-      acc += currentString + interpolatedString;
-    }
-    return acc;
-};
+const createElement = tagName => (strings, ...args) => ({
+    type: tagName,
+    template: strings.reduce(
+      (acc, currentString, index) => acc + currentString + (args[index] || ""),
+      ""
+    )
+});
 
-const firstName = "Sedat";
-const lastName = "Uygur";
-
-const template = div`Hello ${firstName} ${lastName} !`;
-
-console.log(template);
+export const div = createElement("div");
+export const p = createElement("p");

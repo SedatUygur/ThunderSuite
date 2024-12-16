@@ -1,12 +1,3 @@
 {
-    "plugins": ["@babel/plugin-transform-object-rest-spread"],
-    "presets": [
-        [
-            "@babel/preset-env",
-            {
-                "useBuiltIns": "entry",
-                "corejs": "3.22"
-            }
-        ]
-    ]
+    "plugins": ["@babel/plugin-transform-object-rest-spread"]
 }

@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "ThunderSuite is a front-end framework from scratch",
   "main": "index.js",
+  "type": "module",
   "scripts": {
+    "build": "rm -rf build/ && parcel build index.js -d build/",
+    "serve": "rm -rf .cache && rm -rf dist && parcel serve index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -31,6 +34,7 @@
   },
   "homepage": "https://github.com/SedatUygur/ThunderSuite#readme",
   "devDependencies": {
+    "@babel/core": "^7.12.0",
     "@babel/plugin-transform-object-rest-spread": "^7.25.9",
     "@babel/preset-env": "^7.26.0",
     "parcel": "^2.13.2"
