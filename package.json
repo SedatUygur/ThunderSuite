@@ -1,0 +1,41 @@
+{
+  "name": "thundersuite",
+  "version": "1.0.0",
+  "description": "ThunderSuite is a front-end framework from scratch",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SedatUygur/ThunderSuite.git"
+  },
+  "keywords": [
+    "ThunderSuite",
+    "framework",
+    "Framework",
+    "frontend framework",
+    "front-end framework",
+    "front end framework",
+    "Frontend framework",
+    "Front-end framework",
+    "Front end framework",
+    "frontend",
+    "front-end",
+    "front end"
+  ],
+  "author": "Sedat Uygur <sedat.uygur@outlook.com> (https://github.com/SedatUygur)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SedatUygur/ThunderSuite/issues"
+  },
+  "homepage": "https://github.com/SedatUygur/ThunderSuite#readme",
+  "devDependencies": {
+    "@babel/plugin-transform-object-rest-spread": "^7.25.9",
+    "@babel/preset-env": "^7.26.0",
+    "parcel": "^2.13.2"
+  },
+  "dependencies": {
+    "snabbdom": "^3.6.2"
+  }
+}
