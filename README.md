@@ -2,43 +2,42 @@
 
 ThunderSuite is a front-end framework from scratch
 
-## First step (simple view)
+# Template litterals as template engine (tag: step-1)
 
-* Create a `./framework` directory
-
-* Create a `./framework/element.js` file
-
-* Add this to the file and check the output of custom template literals:
+The first step is to create a folder and a file at `./framework/element.js`. We'll use template litterals a template engine. Let's create our first template litteral handler called `div`:
 
 ```javascript
 const div = (strings, ...args) => console.log(strings, args);
+
 const firstName = "Sedat";
 const lastName = "Uygur";
+
 div`Hello ${firstName} ${lastName} !`;
 ```
+
+Run the following command to check the result of such a bunch of code:
 
 ```shell
 $ node ./framework/element.js
 ```
 
-* Reducing to offer a clean string instead of the array
+We can see different arrays. Let's use de `Array.reduce` function to create a string with the previous code:
 
 ```javascript
-const div = (strings, ...args) => {
-    let acc = "";
-    for(const currentString of strings) {
-      const interpolatedString = (args[index] || "");
-      acc += currentString + interpolatedString;
-    }
-    return acc;
-};
+const div = (strings, ...args) =>
+  strings.reduce(
+    (acc, currentString, index) => acc + currentString + (args[index] || ""),
+    ""
+  );
+
 const firstName = "Sedat";
 const lastName = "Uygur";
+
 const template = div`Hello ${firstName} ${lastName} !`;
-console.log(template);
+console.log(template); // It prints `Hello Sedat Uygur !`
 ```
 
-* Let's refactor and create something more abstracted
+Let's refacto to be able to create something else than a `div`, like a `p` for example:
 
 ```javascript
 const createElement = tagName => (strings, ...args) => ({
@@ -48,29 +47,32 @@ const createElement = tagName => (strings, ...args) => ({
     ""
   )
 });
+
 const div = createElement("div");
 const p = createElement("p");
+
 const firstName = "Sedat";
 const lastName = "Uygur";
+
 const template = div`Hello ${firstName} ${lastName} !`;
+// const template = p`Hello ${firstName} ${lastName} !`;
 console.log(template);
 ```
 
-The type is important because we'll need it to add the element to the DOM!
-
-* Let's create a `./framework/index.js`
+We'll now create a `./framework/index.js` that will act as the `core` of our framework. For now, it will simply take the previously created element and add it to a DOM node.
 
 ```javascript
 export const init = (selector, component) => {
   const app = document.querySelector(selector);
   const newElement = document.createElement(component.type);
   const newTextContent = document.createTextNode(component.template);
+
   newElement.append(newTextContent);
   app.append(newElement);
 };
 ```
 
-* remove unnecessary stuff to make the `./framework/element.js` looks like:
+We don't need console logs and template creation anymore. We simply need to export the `p` and `div` elements, let's remove the noise all around in `./framework/element`
 
 ```javascript
 const createElement = tagName => (strings, ...args) => ({
@@ -80,47 +82,55 @@ const createElement = tagName => (strings, ...args) => ({
     ""
   )
 });
+
 export const div = createElement("div");
 export const p = createElement("p");
 ```
 
-* put the following in the `./index.js` : it spawns the root component inside a #app selector
+Let's now decide where the app will start. In the root file (not the framework root one), like `./index.js`, let's add:
 
 ```javascript
 import { init } from "./framework";
 import { div } from "./framework/element";
+
 const firstName = "Sedat";
 const lastName = "Uygur";
+
 init("#app", div`Hello ${firstName} ${lastName}`);
-init("#app", p`Hello ${firstName} ${lastName}`);
+// init("#app", p`Hello ${firstName} ${lastName}`); works as simply as moving div to p
 ```
 
-Let's create our first component in `./src/user.js`:
+It's good, but we need to use component instead of simple `div` or `p`. Let's create a `User` component at `./src/user.js`:
 
 ```javascript
 import { div } from "../framework/element";
+
 const firstName = "Sedat";
 const lastName = "Uygur";
+
 export const User = ({ firstName, lastName }) =>
   div`Hello ${firstName} ${lastName}`;
 ```
 
-And modify `./index.js`:
+And so modify `./index.js`:
 
 ```javascript
 import { init } from "./framework";
 import { User } from "./src/user";
+
 const firstName = "Sedat";
 const lastName = "Uygur";
+
 init("#app", User({ firstName, lastName }));
 ```
 
-# Second step (adding Virtual DOM)
+# Using an existing virtual DOM library (tag: step-2)
 
-Modify the `./framework/element.js` with:
+`h` is a common way to use a virtual DOM (there's a name, but I forget it).
 
 ```javascript
 import h from "snabbdom/h";
+
 const createElement = tagName => (strings, ...args) => ({
   type: "element",
   template: h(
@@ -132,15 +142,17 @@ const createElement = tagName => (strings, ...args) => ({
     )
   )
 });
+
 export const div = createElement("div");
 export const p = createElement("p");
 ```
 
-And `./framework/index.js` by
+With our new VDOM, `./framework/index.js` will be slightly simpler. Snabbdom will manage each of the dom operations for us !
 
 ```javascript
 import * as snabbdom from "snabbdom";
 const patch = snabbdom.init([]);
+
 export const init = (selector, component) => {
   const app = document.querySelector(selector);
   patch(app, component.template);
@@ -231,7 +243,7 @@ export const init = (selector, component) => {
 };
 ```
 
-# Third step (adding state management)
+## Third step (adding state management)
 
 We'll use a functional programming approach and add a new (shared) behaviour to our components using something called HOF:
 
@@ -327,13 +339,58 @@ And let's now change the user component:
 import { createComponent } from "../framework";
 import { div } from "../framework/element";
 import { onClick } from "../framework/event";
-const firstName = "Sedat";
-const lastName = "Uygur";
+
 const methods = { changeName: (state, firstName) => ({ ...state, firstName }) };
 const initialState = { firstName: "Sedat", lastName: "Uygur" };
 const template = ({ firstName, lastName, methods }) =>
   div`${onClick(() =>
-    methods.changeName("Thomas")
+    methods.changeName("Sedat Can")
   )} Hello ${firstName} ${lastName}`;
 export const User = createComponent({ template, methods, initialState });
+```
+
+## Last step bringing it all together
+
+In `./framework/index.js`, add :
+
+```javascript
+import * as snabbdom from "snabbdom";
+const patch = snabbdom.init([
+  require("snabbdom/modules/eventlisteners").default
+]);
+export const init = (selector, component) => {
+  const app = document.querySelector(selector);
+  patch(app, component.template);
+};
+let state = {};
+export const createComponent = ({
+  template,
+  methods = {},
+  initialState = {}
+}) => {
+  state = initialState;
+  let previous;
+  const mappedMethods = props =>
+    Object.keys(methods).reduce(
+      (acc, key) => ({
+        ...acc,
+        [key]: (...args) => {
+          state = methods[key](state, ...args);
+          const nextNode = template({
+            ...props,
+            ...state,
+            methods: mappedMethods
+          });
+          patch(previous.template, nextNode.template);
+          previous = nextNode;
+          return state;
+        }
+      }),
+      {}
+    );
+  return props => {
+    previous = template({ ...props, ...state, methods: mappedMethods(props) });
+    return previous;
+  };
+};
 ```
