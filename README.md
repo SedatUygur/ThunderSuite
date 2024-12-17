@@ -340,7 +340,14 @@ import { createComponent } from "../framework";
 import { div } from "../framework/element";
 import { onClick } from "../framework/event";
 
-const methods = { changeName: (state, firstName) => ({ ...state, firstName }) };
+const firstName = "Sedat";
+const lastName = "Uygur";
+const methods = {
+  changeName: (state, firstName) => ({
+    ...state,
+    firstName: state.firstName === "Sedat" ? "Sedat Can" : "Sedat"
+  })
+};
 const initialState = { firstName: "Sedat", lastName: "Uygur" };
 const template = ({ firstName, lastName, methods }) =>
   div`${onClick(() =>
@@ -379,7 +386,7 @@ export const createComponent = ({
           const nextNode = template({
             ...props,
             ...state,
-            methods: mappedMethods
+            methods: mappedMethods(props)
           });
           patch(previous.template, nextNode.template);
           previous = nextNode;

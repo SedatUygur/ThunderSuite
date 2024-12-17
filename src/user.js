@@ -5,7 +5,12 @@ import { onClick } from "../framework/event";
 const firstName = "Sedat";
 const lastName = "Uygur";
 
-const methods = { changeName: (state, firstName) => ({ ...state, firstName }) };
+const methods = {
+  changeName: (state, firstName) => ({
+    ...state,
+    firstName: state.firstName === "Sedat" ? "Sedat Can" : "Sedat"
+  })
+};
 const initialState = { firstName: firstName, lastName: lastName };
 
 const template = ({ firstName, lastName, methods }) =>
