@@ -10,7 +10,11 @@ export default [
       "src/*.js",
     ],
     ignores: [".parcel-cache/", "dist/", "dist/*", "node_modules/"],
-    languageOptions: { globals: globals.browser }
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      globals: globals.browser,
+    }
   },
   pluginJs.configs.recommended,
 ];
