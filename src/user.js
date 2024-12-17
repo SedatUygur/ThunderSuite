@@ -6,7 +6,7 @@ const firstName = "Sedat";
 const lastName = "Uygur";
 
 const methods = {
-  changeName: (state, firstName) => ({
+  changeName: (state) => ({
     ...state,
     firstName: state.firstName === "Sedat" ? "Sedat Can" : "Sedat"
   })

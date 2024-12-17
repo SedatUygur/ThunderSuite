@@ -5,8 +5,12 @@
   "main": "index.js",
   "scripts": {
     "build": "rm -rf build/ && parcel build index.js -d build/",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "serve": "rm -rf .cache && rm -rf dist && parcel serve index.html",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest run",
+    "test:watch": "vitest watch",
+    "test:coverage": "vitest run --coverage"
   },
   "repository": {
     "type": "git",
@@ -14,8 +18,13 @@
   },
   "keywords": [
     "ThunderSuite",
+    "thundersuite",
+    "js",
+    "javascript",
     "framework",
     "Framework",
+    "js framework",
+    "javascript framework",
     "frontend framework",
     "front-end framework",
     "front end framework",
@@ -36,7 +45,12 @@
     "@babel/core": "^7.12.0",
     "@babel/plugin-transform-object-rest-spread": "^7.25.9",
     "@babel/preset-env": "^7.26.0",
-    "parcel": "^2.13.2"
+    "@eslint/js": "^9.17.0",
+    "@vitest/coverage-v8": "^2.1.8",
+    "eslint": "^9.17.0",
+    "globals": "^15.13.0",
+    "parcel": "^2.13.2",
+    "vitest": "^2.1.8"
   },
   "dependencies": {
     "snabbdom": "^3.6.2"
