@@ -24,5 +24,7 @@ const createElement = tagName => (strings, ...args) => {
   };
 };
 
+export const button = createElement("button");
 export const div = createElement("div");
 export const p = createElement("p");
+export const span = createElement("span");
