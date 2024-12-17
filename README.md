@@ -92,12 +92,15 @@ Install a package manager e.g npm, yarn, pnpm, bun etc.
    ```sh
    git clone https://github.com/SedatUygur/ThunderSuite.git
    ```
-2. Then, install the project dependencies:
-
+2. Then, change the directory:
    ```sh
-   npm install
+   cd ThunderSuite
    ```
-3. You can follow the contribution guidelines to proceed
+3. Finally for launch:
+   ```sh
+   yarn && yarn serve
+   ```
+4. You can follow the contribution guidelines to proceed
 
 <!-- FEATURES -->
 ## Features
@@ -126,14 +129,25 @@ Install a package manager e.g npm, yarn, pnpm, bun etc.
   - [x] Display the template in the DOM
   - [x] Creating our first component
 
+- [ ] Adding external content
+- [ ] Asynchronous components
 - [ ] Children rendering
+- [ ] Component lifecycle hooks
 - [ ] Dependency Injection
+- [ ] Diffing virtual trees
+- [ ] Implementing a router
 - [ ] Improving performances
-- [ ] Managing lifecycle
+- [ ] Keyed lists
+- [ ] Managing application's lifecycle
   - [ ] How / When to fetch data?
 - [ ] Managing style encapsulation
   - [ ] Shadow DOM
   - [ ] Alternatives
+- [ ] Routing the application
+- [ ] Scheduler
+- [ ] Slots
+- [ ] SPA routing
+- [ ] Testing asynchronous components
 
 See the [open issues](https://github.com/SedatUygur/ThunderSuite/issues) for a full list of proposed features (and known issues).
 
