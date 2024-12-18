@@ -1,4 +1,5 @@
 import { h } from "snabbdom";
+import { withoutNulls } from './utils/arrays'
 
 const initialState = {
   template: "",
@@ -17,9 +18,11 @@ const createReducer = args => (acc, currentString, index) => {
 };
 
 const createElement = tagName => (strings, ...args) => {
-  const { template, on } = strings.reduce(createReducer(args), initialState);
+  const { template, on } = strings && Array.isArray(strings) && strings.reduce(createReducer(args), initialState);
   return {
     type: "element",
+    children: mapTextNodes(withoutNulls(strings)),
+    tag: tagName,
     template: h(tagName, { on }, template)
   };
 };
@@ -28,3 +31,9 @@ export const button = createElement("button");
 export const div = createElement("div");
 export const p = createElement("p");
 export const span = createElement("span");
+
+const mapTextNodes = children => {
+  return children && children.map((child) =>
+      typeof child === 'string' ? p(child) : child
+  )
+}
