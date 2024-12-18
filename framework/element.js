@@ -1,4 +1,5 @@
 import { h } from "snabbdom";
+import { removeEventListeners } from './event'
 import { withoutNulls } from './utils/arrays'
 
 const initialState = {
@@ -26,6 +27,18 @@ const createElement = tagName => (strings, ...args) => {
     template: h(tagName, { on }, template)
   };
 };
+
+export const removeElement = (virtualDOM) => {
+  const { children, el, listeners } = virtualDOM
+
+  el.remove()
+  children.forEach(removeElement)
+
+  if (listeners) {
+    removeEventListeners(listeners, el)
+    delete virtualDOM.listeners
+  }
+}
 
 export const button = createElement("button");
 export const div = createElement("div");

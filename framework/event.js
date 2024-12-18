@@ -12,6 +12,12 @@ export const addEventListeners = (listeners = {}, el) => {
     return listeners
 }
 
+export const removeEventListeners = (listeners = {}, el) => {
+    Object.entries(listeners).forEach(([eventName, handler]) => {
+      el.removeEventListener(eventName, handler)
+    })
+}
+
 export const onClick = f => ({
     type: "event",
     click: f
