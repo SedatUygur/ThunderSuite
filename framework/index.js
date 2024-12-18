@@ -1,7 +1,7 @@
-import { init, eventListenersModule } from "snabbdom";
+import { init, classModule, eventListenersModule, propsModule, styleModule } from "snabbdom";
 
 const patch = init([
-    eventListenersModule
+  classModule, eventListenersModule, propsModule, styleModule
 ]);
 
 export const initial = (selector, component) => {
