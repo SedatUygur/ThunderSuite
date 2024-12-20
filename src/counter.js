@@ -27,10 +27,5 @@ const template = ({ count, methods }) =>
         methods.sub()
     )}
     Click to subtract! Count : ${count}`;*/
-    /*div([
-        button([ onClick(() => methods.sub()), '-' ]),
-        span([p(count)]),
-        button([ onClick(() => methods.add()), '+' ]),
-    ]);*/
 
 export const Counter = createComponent({ template, methods, initialState });

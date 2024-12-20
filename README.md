@@ -131,15 +131,11 @@ Install a package manager e.g npm, yarn, pnpm, bun etc.
 
 - [ ] Adding external content
 - [ ] Asynchronous components
-- [x] Children rendering
+- [ ] Children rendering
 - [ ] Component lifecycle hooks
 - [ ] Dependency Injection
 - [ ] Diffing virtual trees
 - [ ] Implementing a router
-- [ ] Improving experience
-  - [ ] Simpler example, less functional oriented (e.g reduce)
-  - [ ] Translate the non-english phrases to English
-  - [ ] Use a gatsby project
 - [ ] Improving performances
 - [ ] Keyed lists
 - [ ] Managing application's lifecycle
