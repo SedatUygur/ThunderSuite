@@ -62,6 +62,10 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+> [!WARNING]
+> This project is under development. I decided to create my own virtual DOM.
+> I will use it when it's ready. You can watch the project here. https://github.com/SedatUygur/ThunderDOM
+
 ThunderSuite is a front-end framework from scratch.
 
 This project aims to create a frontend framework.
