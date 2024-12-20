@@ -17,9 +17,10 @@ const createReducer = args => (acc, currentString, index) => {
 };
 
 const createElement = tagName => (strings, ...args) => {
-  const { template, on } = strings.reduce(createReducer(args), initialState);
+  const { template, on } = strings && Array.isArray(strings) && strings.reduce(createReducer(args), initialState);
   return {
     type: "element",
+    tag: tagName,
     template: h(tagName, { on }, template)
   };
 };
